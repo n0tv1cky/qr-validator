@@ -5,7 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { LoginPage } from "./components/LoginPage";
+import { Authenticator } from "./components/Authenticator";
 import { HomePage } from "./components/HomePage";
 import { useNavigate } from "react-router-dom";
 
@@ -41,27 +41,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
-}
-
-function Authenticator({ isLoggedIn, setIsLoggedIn }) {
-  const navigate = useNavigate();
-
-  const handleLogin = (username, password) => {
-    // Hardcoded authentication, replace with actual authentication logic
-    if (username === "admin" && password === "password") {
-      localStorage.setItem("isLoggedIn", "true"); // Store authentication state
-      setIsLoggedIn(true);
-      navigate("/home"); // Redirect to home page after successful login
-    } else {
-      alert("Invalid username or password");
-    }
-  };
-
-  return isLoggedIn ? (
-    <Navigate to="/home" />
-  ) : (
-    <LoginPage onLogin={handleLogin} />
   );
 }
 
