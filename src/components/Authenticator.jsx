@@ -1,47 +1,26 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import { Authenticator } from "./components/Authenticator";
-import { HomePage } from "./components/HomePage";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { LoginPage } from "./LoginPage";
+import { Navigate } from "react-router-dom";
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Authenticator({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
 
-  // Check authentication state on page load
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
-  }, []);
-
-  // Function to handle logout
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
+  const handleLogin = (username, password) => {
+    if (username === "admin" && password === "password") {
+      localStorage.setItem("isLoggedIn", "true");
+      setIsLoggedIn(true);
+      navigate("/home");
+    } else {
+      alert("Invalid username or password");
+    }
   };
 
-  return (
-    <Router>
-      <div>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Authenticator
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
-          <Route path="/home" element={<HomePage onSignOut={handleLogout} />} />
-        </Routes>
-      </div>
-    </Router>
+  return isLoggedIn ? (
+    <Navigate to="/home" />
+  ) : (
+    <LoginPage onLogin={handleLogin} />
   );
 }
 
-export default App;
+export default Authenticator;
