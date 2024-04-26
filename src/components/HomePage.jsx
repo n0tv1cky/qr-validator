@@ -1,20 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navbar } from "./Navbar";
+import { Scanner } from "./Scanner";
 
 export const HomePage = ({ onSignOut }) => {
-  const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    onSignOut();
-    navigate("/");
-  };
-
   return (
     <>
-      <div>
-        <h2>Welcome to the Home Page</h2>
-        <p>This is a protected page. Only authenticated users can access it.</p>
-        <button onClick={handleSignOut}>Sign Out</button>
+      <Navbar onSignOut={onSignOut} />
+      <div className="p-5">
+        {/* <h2>Welcome to the Home Page</h2>
+        <p>This is a protected page. Only authenticated users can access it.</p> */}
+        <Scanner />
       </div>
     </>
   );
