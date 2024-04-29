@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
+import ValidationComponent from './ValidationComponent';
 
 export const Scanner = () => {
-  const [scanResult, setScanResult] = useState(null);
+  const [scanResult, setScanResult] = useState(null);  
+  const [textFieldValue, setTextFieldValue] = useState(''); 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
@@ -16,19 +18,27 @@ export const Scanner = () => {
     function success(result) {
       scanner.clear();
       setScanResult(result);
+      setTextFieldValue(result);
     }
     function error(err) {
       console.warn(err);
     }
   }, []);
 
+  const handleTextFieldChange = (event) => {
+    setTextFieldValue(event.target.value);
+  };
+
   return (
     <div className="Scanner">
       {scanResult ? (
-        <>
-          <div>
-            {" "}
-            Success: <a href={`https://${scanResult}`}>{scanResult}</a>
+        <> 
+        <div>
+    {" "}
+    Code Input : <input id="res" type="text"  value={textFieldValue} onChange={handleTextFieldChange}></input>         
+  </div><br/><br/>        
+          <div>          
+            <ValidationComponent textFieldValue={textFieldValue} />
           </div>
         </>
       ) : (
