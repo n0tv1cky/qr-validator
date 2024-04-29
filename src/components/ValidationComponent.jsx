@@ -8,7 +8,7 @@ const ValidationComponent = ({textFieldValue}) => {
       console.log(textFieldValue);
 
       // Create a query to filter documents by email field
-      const q = query(collection(firestore, "registration"), where("name", "==", textFieldValue));
+      const q = query(collection(firestore, "registration"), where("id", "==", textFieldValue));
 
       onSnapshot(q, (querySnapShot) => {
         const data = querySnapShot.docs.map((doc) => ({
@@ -17,7 +17,7 @@ const ValidationComponent = ({textFieldValue}) => {
         }))
         console.log("bird details array", data);
       });
-      
+
     } catch (error) {
       console.error('Error fetching data from Firebase:', error);
     }
