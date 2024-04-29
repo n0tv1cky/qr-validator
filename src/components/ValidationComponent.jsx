@@ -8,14 +8,14 @@ const ValidationComponent = ({textFieldValue}) => {
       console.log(textFieldValue);
 
       // Create a query to filter documents by email field
-      const q = query(collection(firestore, "registration"), where("id", "==", textFieldValue));
+      const q = query(collection(firestore, "registration"), where("id", "array-contains", textFieldValue));
 
       onSnapshot(q, (querySnapShot) => {
         const data = querySnapShot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
         }))
-        console.log("bird details array", data);
+        console.log("student detail", data);
       });
 
     } catch (error) {
