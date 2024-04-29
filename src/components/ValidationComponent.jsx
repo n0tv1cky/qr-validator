@@ -1,34 +1,43 @@
-import React,{useState} from 'react';
-import firestore from '../firebasekv';
-import {collection, query, where, getDocs,onSnapshot  } from 'firebase/firestore';
+import React, { useState } from "react";
+import firestore from "../config/firebasekv";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 
-const ValidationComponent = ({textFieldValue}) => {
+const ValidationComponent = ({ textFieldValue }) => {
   const handleClick = async () => {
     try {
-      console.log(textFieldValue);
+      console.log("Text Field Value:", textFieldValue);
 
-      // Create a query to filter documents by email field
-      const q = query(collection(firestore, "registration"), where("id", "==", textFieldValue));
+      // Create a query to filter documents by ID field
+      const q = query(
+        collection(firestore, "registration"),
+        where("id", "==", textFieldValue)
+      );
 
-      onSnapshot(q, (querySnapShot) => {
-        const data = querySnapShot.docs.map((doc) => ({
+      console.log("Query:", q);
+
+      onSnapshot(q, (querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          data: doc.data(),
-        }))
-        console.log("bird details array", data);
+          name: doc.data().name,
+          dependants: doc.data().dependants,
+        }));
+        console.log("Result:", data);
       });
-
     } catch (error) {
-      console.error('Error fetching data from Firebase:', error);
+      console.error("Error fetching data from Firebase:", error);
     }
   };
 
   return (
-   
     <div>
       <button onClick={handleClick}>Validate</button>
     </div>
- 
   );
 };
 
