@@ -50,9 +50,10 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #b4e7255d;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: #141a18;
 }
 button:hover {
   border-color: #646cff;
@@ -70,16 +71,24 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
+ 
 }
 
 #res {
   border-color: #1a1a1a;
-  background-color: hsl(202, 24%, 82%);
+  background-color: hsl(80.31deg 37.85% 89.86%);
 }
 
 .whalf{
   width: 50%;
+}
+
+#password {
+  border-color: #1a1a1a;
+  background-color: hsl(80.31deg 37.85% 89.86%);
+}
+
+#username {
+  border-color: #1a1a1a;
+  background-color: hsl(80.31deg 37.85% 89.86%);
 }

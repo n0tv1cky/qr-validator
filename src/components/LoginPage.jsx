@@ -17,7 +17,7 @@ export const LoginPage = ({ onLogin }) => {
           <div className="w-full max-w-xl">
             <h2 className="mb-6 text-2xl font-semibold text-center">Login</h2>
             <div className="mb-4">
-              <label htmlFor="username" className="block text-white">
+              <label htmlFor="username" className="block text-black">
                 Username:
               </label>
               <input
@@ -29,7 +29,7 @@ export const LoginPage = ({ onLogin }) => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-white">
+              <label htmlFor="password" className="block text-black">
                 Password:
               </label>
               <input

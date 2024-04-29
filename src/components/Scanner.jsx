@@ -35,7 +35,7 @@ export const Scanner = () => {
         <> 
         <div>
     {" "}
-    Code Input : <input id="res" type="text"  value={textFieldValue} onChange={handleTextFieldChange}></input>         
+    Unique ID : <input id="res" type="text"  value={textFieldValue} onChange={handleTextFieldChange}></input>         
   </div><br/><br/>        
           <div>          
             <ValidationComponent textFieldValue={textFieldValue} />
