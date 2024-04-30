@@ -50,7 +50,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #b4e7255d;
+  background-color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
   color: #141a18;
@@ -71,15 +71,9 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
- 
 }
 
-#res {
-  border-color: #1a1a1a;
-  background-color: hsl(80.31deg 37.85% 89.86%);
-}
-
-.whalf{
+.whalf {
   width: 50%;
 }
 
@@ -93,9 +87,9 @@ button:focus-visible {
   background-color: hsl(80.31deg 37.85% 89.86%);
 }
 
-#msg{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: x-large ;
+#msg {
+  font-family: sans-serif;
+  font-size: x-large;
   font-weight: bolder;
-  color: rgb(170, 37, 44);
+  color: rgb(36, 126, 251);
 }

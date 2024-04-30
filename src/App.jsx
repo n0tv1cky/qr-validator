@@ -23,7 +23,12 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Authenticator isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+            element={
+              <Authenticator
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
           />
           <Route path="/home" element={<HomePage onSignOut={handleLogout} />} />
         </Routes>

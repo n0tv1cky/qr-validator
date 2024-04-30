@@ -9,8 +9,6 @@ export const HomePage = ({ onSignOut }) => {
         <Navbar onSignOut={onSignOut} />
       </div>
       <div className="p-5">
-        {/* <h2>Welcome to the Home Page</h2>
-        <p>This is a protected page. Only authenticated users can access it.</p> */}
         <Scanner />
       </div>
     </>
