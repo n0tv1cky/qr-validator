@@ -11,7 +11,6 @@ import {
 
 const ValidationComponent = ({ textFieldValue }) => {
   const [message, setMessage] = useState("");
-  const [valid, setValid] = useState("");
   const handleClick = async () => {
     try {
       console.log(textFieldValue);
@@ -21,30 +20,30 @@ const ValidationComponent = ({ textFieldValue }) => {
         collection(firestore, "registration"),
         where("id", "array-contains", textFieldValue)
       );
-
-      onSnapshot(q, (querySnapShot) => {
+      let processed = false; // 
+      const unsubscribe=onSnapshot(q, (querySnapShot) => {
         const data = querySnapShot.docs.map((doc) => ({
           id: doc.id,
           data: doc.data(),
         }));
-        if (data.length > 0) {
-          const studentName = data[0].data.name[0]; // Access the name attribute
-         
+        if (data.length > 0 && !processed) {
+          const studentName = data[0].data.name[0]; // Access the name attribute         
           const year = data[0].data.passout[0];
           const deps = data[0].data.dependants[0]?data[0].data.dependants[0]:0;
           const val = data[0].data.used[0];
           
-          setValid(val)
-          
-          if(valid!=="1"){
-          setMessage(studentName +" of "+year+" with "+deps+" guests is successfully registered !!")
-          updateUsed(data[0].id);
+          if(val !== "1"){
+          setMessage(studentName +" of "+year+" with "+deps+" guests is successfully registered !!")          
           }else{
           setMessage(studentName +" of "+year +" is already registered . The code can't be used again !!")
           }
+          updateUsed(data[0].id);
+          processed=true;
+          unsubscribe();
         } else {
           // Handle case when no document is found
           setMessage("Invalid Registration Code")
+          processed=true;
         }
       });
     } catch (error) {
