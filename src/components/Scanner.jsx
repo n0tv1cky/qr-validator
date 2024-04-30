@@ -31,7 +31,8 @@ export const Scanner = () => {
   };
 
   return (
-    <div className="Scanner">
+   
+    <div className="Scanner">   
       {scanResult ? (
         <>
           <div>

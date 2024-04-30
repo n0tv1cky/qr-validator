@@ -92,3 +92,10 @@ button:focus-visible {
   border-color: #1a1a1a;
   background-color: hsl(80.31deg 37.85% 89.86%);
 }
+
+#msg{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: x-large ;
+  font-weight: bolder;
+  color: rgb(170, 37, 44);
+}

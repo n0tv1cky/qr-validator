@@ -4,13 +4,14 @@ import {
   collection,
   query,
   where,
-  getDocs,
   onSnapshot,
+  doc,
+  updateDoc
 } from "firebase/firestore";
 
 const ValidationComponent = ({ textFieldValue }) => {
-  const [name, setName] = useState("");
-  const [dependants, setDependants] = useState(0);
+  const [message, setMessage] = useState("");
+  const [valid, setValid] = useState("");
   const handleClick = async () => {
     try {
       console.log(textFieldValue);
@@ -28,11 +29,22 @@ const ValidationComponent = ({ textFieldValue }) => {
         }));
         if (data.length > 0) {
           const studentName = data[0].data.name[0]; // Access the name attribute
-          console.log("student name", studentName);
-          setName(studentName);
+         
+          const year = data[0].data.passout[0];
+          const deps = data[0].data.dependants[0]?data[0].data.dependants[0]:0;
+          const val = data[0].data.used[0];
+          
+          setValid(val)
+          
+          if(valid!=="1"){
+          setMessage(studentName +" of "+year+" with "+deps+" guests is successfully registered !!")
+          updateUsed(data[0].id);
+          }else{
+          setMessage(studentName +" of "+year +" is already registered . The code can't be used again !!")
+          }
         } else {
           // Handle case when no document is found
-          setName("No student found");
+          setMessage("Invalid Registration Code")
         }
       });
     } catch (error) {
@@ -40,10 +52,25 @@ const ValidationComponent = ({ textFieldValue }) => {
     }
   };
 
+  const updateUsed = async (docId) => {
+    try {
+      // Reference to the document
+      const regDocRef = doc(firestore, "registration", docId);
+
+      // Update the used field
+      await updateDoc(regDocRef, {
+        used: ["1"] // Assuming "used" is an array field
+      });
+
+      console.log("Document successfully updated!");
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
+
   return (
     <div>
-      <div>Name: {name}</div>
-      <div>Dependants: {dependants}</div>
+      <div id="msg">{message}</div>
       <button onClick={handleClick}>Validate</button>
     </div>
   );
